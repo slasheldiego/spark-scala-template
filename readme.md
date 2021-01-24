@@ -1,1 +1,1 @@
-# Scala-Spark Application Templeate
+# Scala-Spark Application Template
