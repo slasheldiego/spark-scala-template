@@ -3,9 +3,29 @@
  */
 package ScalaSparkTemplate
 
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.Row
+import ScalaSparkTemplate.utils.utils
+
 object App {
   def main(args: Array[String]): Unit = {
     println(greeting())
+
+    val utils = new utils(); 
+
+    val spark:SparkSession = utils.createSparkSession("local[1]","SparkJob")
+
+    val sequence = List((1,"Diego"),
+                       (2,"Lionel"))
+
+    val rdd = spark.sparkContext.parallelize(sequence)
+
+    val df = spark.createDataFrame(rdd)
+
+    val collectData = df.collect()
+
+    collectData.foreach(println)
+
   }
 
   def greeting(): String = "Hello, world!"
